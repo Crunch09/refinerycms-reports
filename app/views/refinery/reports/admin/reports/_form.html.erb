@@ -1,0 +1,218 @@
+<%= nested_form_for [refinery, :reports_admin, @report], multipart: true do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @report,
+              :include_object_name => true %>
+
+
+  <div class='field'>
+    <%= f.label :keyword -%>
+    <%= f.text_field :keyword, :class => 'larger widest'  -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :typ %>
+    <%= f.select(:typ, Type::TYPES, {}) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :location -%>
+    <%= f.text_field :location  -%>
+
+  </div>
+
+  <div class='field'>
+    <%= f.label :started_at -%>
+    <%= f.datetime_select :started_at  -%>
+
+  </div>
+
+  <div class='field'>
+    <%= f.label :ended_at -%>
+    <%= f.datetime_select :ended_at  -%>
+
+  </div>
+
+  <div class='field'>
+    <%= f.label :is_running -%>
+    <%= f.check_box :is_running, :checked => @report[:is_running]  -%>
+
+  </div>
+
+  <div class='field'>
+    <%= f.label 'Koordinaten' %>
+    <div id="map_canvas"></div>
+  </div>
+
+  <%= f.hidden_field :coordinates %>
+
+  <div class='field'>
+    <%= f.label :chief -%>
+    <%= f.text_field :chief  -%>
+
+  </div>
+
+  <div class='field'>
+    <% ::Refinery::Reports::Vehicle.grouped.each do |department, vehicles| %>
+       <p>
+        <h3><%= department %></h3>
+        <% vehicles.each do |vehicle| %>
+          <%= check_box_tag "vehicle_ids_#{vehicle.id}", vehicle.id,
+          @report.resources.map(&:usable).include?(vehicle), name: 'report[vehicle_ids][]' %><%= vehicle.name %><br>
+        <% end %>
+       </p>
+   <% end %>
+     <%= hidden_field_tag 'report[vehicle_ids][]' %>
+     <% ::Refinery::Reports::Person.grouped.each do |department, persons| %>
+      <p>
+        <h3><%= department %></h3>
+        <% persons.each do |person| %>
+          <%= check_box_tag "person_ids_#{person.id}", person.id,
+            @report.resources.map(&:usable).include?(person), name: 'report[person_ids][]' %><%= person.name %><br>
+        <% end %>
+      </p>
+    <% end %>
+    <%= hidden_field_tag 'report[person_ids][]' %>
+  </div>
+
+  <div class='field'>
+    <div id='page-tabs' class='clearfix ui-tabs ui-widget ui-widget-content ui-corner-all'>
+      <ul id='page_parts'>
+        <% [:report].each_with_index do |part, part_index| %>
+          <li class='ui-state-default<%= ' ui-state-active' if part_index == 0 %>'>
+            <%= link_to t("#{part}", :scope => "activerecord.attributes.refinery/reports/report", :default => part.to_s.titleize), "##{part}" %>
+          </li>
+        <% end %>
+      </ul>
+      <div id='page_part_editors'>
+        <% [:report].each do |part| %>
+          <div class='page_part' id='<%= part %>'>
+            <%= f.text_area part, :rows => 20, :class => 'wymeditor widest' -%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class='field'>
+    <h3>Bilder</h3>
+    <%= f.fields_for :images %>
+    <p><%= f.link_to_add t('add',
+        scope: 'refinery.reports.departments.admin.departments.photo'),
+        :images %></p>
+  </div>
+
+  <div class='field'>
+    <%= f.label :author -%>
+    <%= f.text_field :author  -%>
+  </div>
+
+  <div class='field'>
+    <h3>Links</h3>
+    <%= f.fields_for :links %>
+    <p><%= f.link_to_add t('add',
+          scope: 'refinery.reports.admin.links'),
+          :links %></p>
+  </div>
+
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.reports.admin.reports.report'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @report.keyword) %>
+<% end -%>
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'reports' %>
+<% end %>
+<% content_for :javascripts do %>
+<script src="https://maps.googleapis.com/maps/api/js?keyAIzaSyAn0P5CUJVzdB7fOEYAt6Sz1gEkUtB_leg&sensor=false"
+  type="text/javascript"></script>
+  <%= javascript_include_tag 'gmap3.min' %>
+
+  <script>
+    $(document).ready(function(){
+
+      function check_coordinates_given(){
+        var hash = {};
+        if($('#report_coordinates').val()){
+          hash = {
+            latLng: $('#report_coordinates').val().replace(/[\(\)]/g, '').split(','),
+            visible: true,
+            id: 'location'
+          };
+        }
+        return hash;
+      }
+
+      if($("#report_is_running").is(':checked')){
+        $('label[for=report_ended_at]').siblings().attr('disabled', 'disabled');
+      }else{
+        $('label[for=report_ended_at]').siblings().removeAttr('disabled');
+      }
+
+      $("#report_is_running").change( function(){
+        if($(this).is(':checked')){
+          $('label[for=report_ended_at]').siblings().attr('disabled', 'disabled');
+        }else{
+          $('label[for=report_ended_at]').siblings().removeAttr('disabled');
+        }
+      })
+
+      $("#map_canvas").gmap3({
+        map:{
+            options:{
+              center:[50.975242, 9.323609],
+              zoom:12,
+              mapTypeId: google.maps.MapTypeId.ROADMAP,
+              mapTypeControl: true,
+              mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+              },
+              navigationControl: true
+            },
+            events:{
+              click: function(marker, event, context){
+                $(this).gmap3({
+                  clear: {
+                    id: "location"
+                  },
+                  marker:{
+                    values:[{
+                      latLng: event.latLng,
+                      visible: true,
+                      id: 'location'
+                    }],
+                    events:{
+                      click: function(marker, event, context){
+                        $(this).gmap3({
+                          clear: {
+                            id: 'location'
+                          }
+                        });
+                        $('#report_coordinates').val('');
+                      }
+                    }
+                  }
+                });
+                $('#report_coordinates').val(event.latLng);
+              }
+            }
+        },
+        marker:{
+          values:[
+            check_coordinates_given()
+          ],
+          events:{
+            click: function(marker, event, context){
+              $(this).gmap3({
+                clear: {
+                  id: 'location'
+                }
+              });
+              $('#report_coordinates').val('');
+            }
+          }
+        }
+      });
+    });
+  </script>
+<% end %>

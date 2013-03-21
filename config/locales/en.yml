@@ -1,0 +1,56 @@
+en:
+  refinery:
+    plugins:
+      departments:
+        title: Departments
+      reports:
+        title: Reports
+    reports:
+      admin:
+        departments:
+          actions:
+            create_new: Add New Department
+            reorder: Reorder Departments
+            reorder_done: Done Reordering Departments
+          records:
+            title: Departments
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Departments yet. Click "Add New Department"
+              to add your first department.
+          department:
+            view_live_html: View this department live <br/><em>(opens in a new window)</em>
+            edit: Edit this department
+            delete: Remove this department forever
+        reports:
+          actions:
+            create_new: Add New Report
+            reorder: Reorder Reports
+            reorder_done: Done Reordering Reports
+          records:
+            title: Reports
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Reports yet. Click "Add New Report" to add
+              your first report.
+          report:
+            view_live_html: View this report live <br/><em>(opens in a new window)</em>
+            edit: Edit this report
+            delete: Remove this report forever
+      departments:
+        show:
+          other: Other Departments
+      reports:
+        show:
+          other: Other Reports
+  activerecord:
+    attributes:
+      refinery/reports/department:
+        name: Name
+      refinery/reports/report:
+        keyword: Keyword
+        location: Location
+        started_at: Started At
+        ended_at: Ended At
+        is_running: Is Running
+        chief: Chief
+        report: Report
+        author: Author

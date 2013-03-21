@@ -1,0 +1,58 @@
+nl:
+  refinery:
+    plugins:
+      departments:
+        title: Departments
+      reports:
+        title: Reports
+    reports:
+      admin:
+        departments:
+          actions:
+            create_new: Maak een nieuwe Department
+            reorder: Wijzig de volgorde van de Departments
+            reorder_done: Klaar met het wijzingen van de volgorde van de Departments
+          records:
+            title: Departments
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Departments. Druk op 'Maak een nieuwe Department'
+              om de eerste aan te maken.
+          department:
+            view_live_html: Bekijk deze department op de website <br/><em>(opent een
+              nieuw venster)</em>
+            edit: Bewerk deze department
+            delete: Verwijder deze department voor eeuwig
+        reports:
+          actions:
+            create_new: Maak een nieuwe Report
+            reorder: Wijzig de volgorde van de Reports
+            reorder_done: Klaar met het wijzingen van de volgorde van de Reports
+          records:
+            title: Reports
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Reports. Druk op 'Maak een nieuwe Report'
+              om de eerste aan te maken.
+          report:
+            view_live_html: Bekijk deze report op de website <br/><em>(opent een nieuw
+              venster)</em>
+            edit: Bewerk deze report
+            delete: Verwijder deze report voor eeuwig
+      departments:
+        show:
+          other: Andere Departments
+      reports:
+        show:
+          other: Andere Reports
+  activerecord:
+    attributes:
+      refinery/reports/department:
+        name: Name
+      refinery/reports/report:
+        keyword: Keyword
+        location: Location
+        started_at: Started At
+        ended_at: Ended At
+        is_running: Is Running
+        chief: Chief
+        report: Report
+        author: Author

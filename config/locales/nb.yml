@@ -1,0 +1,58 @@
+nb:
+  refinery:
+    plugins:
+      departments:
+        title: Departments
+      reports:
+        title: Reports
+    reports:
+      admin:
+        departments:
+          actions:
+            create_new: Lag en ny Department
+            reorder: Endre rekkefølgen på Departments
+            reorder_done: Ferdig å endre rekkefølgen Departments
+          records:
+            title: Departments
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Departments enda. Klikk på "Lag en ny Department"
+              for å legge til din første department.
+          department:
+            view_live_html: Vis hvordan denne department ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne department
+            delete: Fjern denne department permanent
+        reports:
+          actions:
+            create_new: Lag en ny Report
+            reorder: Endre rekkefølgen på Reports
+            reorder_done: Ferdig å endre rekkefølgen Reports
+          records:
+            title: Reports
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Reports enda. Klikk på "Lag en ny Report" for
+              å legge til din første report.
+          report:
+            view_live_html: Vis hvordan denne report ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne report
+            delete: Fjern denne report permanent
+      departments:
+        show:
+          other: Andre Departments
+      reports:
+        show:
+          other: Andre Reports
+  activerecord:
+    attributes:
+      refinery/reports/department:
+        name: Name
+      refinery/reports/report:
+        keyword: Keyword
+        location: Location
+        started_at: Started At
+        ended_at: Ended At
+        is_running: Is Running
+        chief: Chief
+        report: Report
+        author: Author

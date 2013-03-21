@@ -1,0 +1,36 @@
+<%= nested_form_for [refinery, :reports_admin, @department] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @department,
+              :include_object_name => true %>
+
+
+  <div class='field'>
+    <%= f.label :name -%>
+    <%= f.text_field :name, class: 'larger widest', placeholder: 'Feuerwehr' -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :intern %>
+    <%= f.check_box :intern %>
+  </div>
+
+  <div class='field'>
+    <h3>Personen</h3>
+    <%= f.fields_for :persons %>
+    <p><%= f.link_to_add t('add',
+            scope: 'refinery.reports.departments.admin.departments.person'),
+            :persons %></p>
+  </div>
+
+  <div class='field'>
+    <h3>Fahrzeuge</h3>
+    <%= f.fields_for :vehicles %>
+    <p><%= f.link_to_add t('add',
+          scope: 'refinery.reports.departments.admin.departments.vehicle'), :vehicles %></p>
+  </div>
+
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.departments.admin.departments.department'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @department.name) %>
+<% end -%>

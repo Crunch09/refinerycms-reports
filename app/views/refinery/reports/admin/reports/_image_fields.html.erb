@@ -1,0 +1,6 @@
+<%= f.file_field :photo unless f.object.photo? %>
+<%= image_tag f.object.photo.thumb.url if f.object.photo?  %>
+
+<%= f.hidden_field :photo_cache %>
+
+<%= f.link_to_remove t('delete', scope: 'refinery.reports.departments.admin.departments.photo') %>

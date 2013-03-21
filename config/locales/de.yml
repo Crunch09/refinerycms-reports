@@ -1,0 +1,73 @@
+de:
+  refinery:
+    plugins:
+      departments:
+        title: Einheiten
+      reports:
+        title: Einsätze
+    reports:
+      admin:
+        departments:
+          actions:
+            create_new: Einheit erstellen
+            reorder: Einheiten neu ordnen
+            reorder_done: Sortieren abgeschlossen.
+          records:
+            title: Einheiten
+            sorry_no_results: Leider wurde nichts gefunden.
+            no_items_yet: Es sind noch keine Einheiten vorhanden. Klicken Sie auf "Einheit erstellen" um eine Einheit hinzuzufügen.
+          department:
+            view_live_html: Sehen Sie sich diese Einheit live an <br/><em>(öffnet sich in einem neuen Fenster)</em>
+            edit: Diese Einheit bearbeiten
+            delete: Diese Einheit für immer entfernen
+        links:
+          delete: Link entfernen
+          add: Weiteren Link hinzuzufügen
+        reports:
+          actions:
+            create_new: Neuen Einsatz erstellen
+            reorder: Einsätze umsortieren
+            reorder_done: Einsätze umsortiert
+          records:
+            title: Einsätze
+            sorry_no_results: Leider wurde nichts gefunden.
+            no_items_yet: Es sind noch keine Einsätze vorhanden. Klicken Sie auf "Neuen Einsatz erstellen" um einen Einsatz hinzuzufügen.
+          report:
+            view_live_html: Sehen Sie sich diesen Einsatzbericht live an <br/><em>(öffnet sich in einem neuen Fenster)</em>
+            edit: Diesen Einsatz bearbeiten
+            delete: Diesen Einsatz löschen
+      departments:
+        admin:
+          departments:
+            vehicle:
+              delete: Fahrzeug entfernen
+              add: Fahrzeug hinzuzufügen
+            person:
+              delete: Person entfernen
+              add: Person hinzuzufügen
+            photo:
+              delete: Photo entfernen
+              add: Weiteres Photo hinzuzufügen
+        show:
+          other: Andere Einheiten
+      reports:
+        show:
+          other: Andere Einsätze
+  activerecord:
+    attributes:
+      refinery/reports/department:
+        name: Name
+      'refinery/reports/report':
+        keyword: Einsatzstichwort
+        location: Einsatzort
+        started_at: Alarmierung
+        ended_at: Einsatzende
+        is_running: dieser Einsatz läuft noch
+        chief: Einsatzleiter
+        report: Einsatzbericht
+        author: Verfasser
+      refinery/reports/department:
+        short_name: Kurzbezeichnung
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"

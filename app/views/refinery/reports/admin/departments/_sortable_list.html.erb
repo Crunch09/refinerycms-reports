@@ -1,0 +1,9 @@
+<h2>Intern</h2>
+<ul>
+  <%= render :partial => 'department',
+             :collection => @departments.select{|d| d.intern?} %>
+</ul>
+<h2>Extern</h2>
+<ul>
+  <%= render partial: 'department',
+             collection: @departments.select{|d| !d.intern?} %>

@@ -1,0 +1,58 @@
+es:
+  refinery:
+    plugins:
+      departments:
+        title: Departments
+      reports:
+        title: Reports
+    reports:
+      admin:
+        departments:
+          actions:
+            create_new: Crear nuevo department
+            reorder: Reordenar departments
+            reorder_done: Reordenación de departments completada
+          records:
+            title: Departments
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay departments todavía. Pulsa en "Crear nuevo Department"
+              para crear tu primer department.
+          department:
+            view_live_html: Ver este department como abierto al público <br/><em>(abre
+              en ventana nueva)</em>
+            edit: Editar este department
+            delete: Borrar este department para siempre
+        reports:
+          actions:
+            create_new: Crear nuevo report
+            reorder: Reordenar reports
+            reorder_done: Reordenación de reports completada
+          records:
+            title: Reports
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay reports todavía. Pulsa en "Crear nuevo Report" para
+              crear tu primer report.
+          report:
+            view_live_html: Ver este report como abierto al público <br/><em>(abre
+              en ventana nueva)</em>
+            edit: Editar este report
+            delete: Borrar este report para siempre
+      departments:
+        show:
+          other: Otros departments
+      reports:
+        show:
+          other: Otros reports
+  activerecord:
+    attributes:
+      refinery/reports/department:
+        name: Name
+      refinery/reports/report:
+        keyword: Keyword
+        location: Location
+        started_at: Started At
+        ended_at: Ended At
+        is_running: Is Running
+        chief: Chief
+        report: Report
+        author: Author

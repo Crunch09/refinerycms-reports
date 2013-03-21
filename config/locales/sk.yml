@@ -1,0 +1,57 @@
+sk:
+  refinery:
+    plugins:
+      departments:
+        title: Departments
+      reports:
+        title: Reports
+    reports:
+      admin:
+        departments:
+          actions:
+            create_new: Pridať Department
+            reorder: Preusporiadať Departments
+            reorder_done: Koniec radenia Departments
+          records:
+            title: Departments
+            sorry_no_results: Ľutujeme, ale neboli nájdené žiadne výsledky.
+            no_items_yet: Nie sú vytvorené žiadne Departments. Kliknite na "Pridať
+              Department" pre pridanie prvého department.
+          department:
+            view_live_html: Zobraziť náhľad department<br/><em>(otvorí sa v novom
+              okne)</em>
+            edit: Upraviť department
+            delete: Zmazať department
+        reports:
+          actions:
+            create_new: Pridať Report
+            reorder: Preusporiadať Reports
+            reorder_done: Koniec radenia Reports
+          records:
+            title: Reports
+            sorry_no_results: Ľutujeme, ale neboli nájdené žiadne výsledky.
+            no_items_yet: Nie sú vytvorené žiadne Reports. Kliknite na "Pridať Report"
+              pre pridanie prvého report.
+          report:
+            view_live_html: Zobraziť náhľad report<br/><em>(otvorí sa v novom okne)</em>
+            edit: Upraviť report
+            delete: Zmazať report
+      departments:
+        show:
+          other: Daľšie Departments
+      reports:
+        show:
+          other: Daľšie Reports
+  activerecord:
+    attributes:
+      refinery/reports/department:
+        name: Name
+      refinery/reports/report:
+        keyword: Keyword
+        location: Location
+        started_at: Started At
+        ended_at: Ended At
+        is_running: Is Running
+        chief: Chief
+        report: Report
+        author: Author
