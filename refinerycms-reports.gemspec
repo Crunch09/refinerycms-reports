@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.date              = '2012-11-30'
   s.summary           = 'Reports extension for Refinery CMS'
   s.require_paths     = %w(lib)
-  s.files             = Dir["{app,config,db,lib}/**/*"] + ["readme.md"]
+  s.files             = Dir["{app,config,db,lib}/**/*"] + ["README.md"]
 
   # Runtime dependencies
   s.add_dependency             'refinerycms-core',    '~> 2.0.8'
