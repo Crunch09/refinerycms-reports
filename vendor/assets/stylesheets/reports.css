@@ -1,0 +1,11 @@
+.inline_block{
+  display: inline-block;
+}
+div#map_canvas{
+  width: 400px;
+  height: 300px;
+}
+
+select[disabled]{
+  background-color: #B8B8B8;
+}
