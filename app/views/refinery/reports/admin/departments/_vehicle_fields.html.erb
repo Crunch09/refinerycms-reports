@@ -1,13 +1,11 @@
-<div class="field">
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-</div>
-
-<div class="field">
-  <%= f.label :short_name %>
-  <%= f.text_field :short_name %>
-</div>
-
-<div class="field">
-<%= f.link_to_remove t('delete', :scope => 'refinery.reports.departments.admin.departments.vehicle') %>
-</div>
+  <span>
+    <%= f.label :name, class: 'inline_block' %>
+    <%= f.text_field :name %>
+  </span>
+  <span>
+    <%= f.label :short_name, class: 'inline_block' %>
+    <%= f.text_field :short_name %>
+  </span>
+  <span>
+    <%= f.link_to_remove refinery_icon_tag('delete') %>
+  </span>
