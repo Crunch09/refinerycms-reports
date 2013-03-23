@@ -120,13 +120,9 @@
              :delete_title => t('delete', :scope => 'refinery.reports.admin.reports.report'),
              :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @report.keyword) %>
 <% end -%>
-<% content_for :stylesheets do %>
-  <%= stylesheet_link_tag 'reports' %>
-<% end %>
 <% content_for :javascripts do %>
 <script src="https://maps.googleapis.com/maps/api/js?keyAIzaSyAn0P5CUJVzdB7fOEYAt6Sz1gEkUtB_leg&sensor=false"
   type="text/javascript"></script>
-  <%= javascript_include_tag 'gmap3.min' %>
 
   <script>
     $(document).ready(function(){
