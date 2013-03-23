@@ -4,7 +4,7 @@ gemspec
 
 gem 'refinerycms', '~> 2.0.3'
 
-gem 'pg'
+gem 'sqlite3'
 
 gem 'nested_form'
 
