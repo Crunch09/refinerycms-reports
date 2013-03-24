@@ -11,7 +11,7 @@
 
   <div class='field'>
     <%= f.label :typ %>
-    <%= f.select(:typ, Type::TYPES, {}) %>
+    <%= f.select(:typ, ::Type::TYPES, {}) %>
   </div>
 
   <div class='field'>
@@ -46,32 +46,35 @@
   <%= f.hidden_field :coordinates %>
 
   <div class='field'>
-    <%= f.label :chief -%>
-    <%= f.text_field :chief  -%>
-
+    <%= f.label :chief %>
+    <%= f.text_field :chief %>
   </div>
 
+  <%= hidden_field_tag 'report[vehicle_ids][]' %>
+  <%= hidden_field_tag 'report[person_ids][]' %>
+
   <div class='field'>
-    <% ::Refinery::Reports::Vehicle.grouped.each do |department, vehicles| %>
-       <p>
-        <h3><%= department %></h3>
-        <% vehicles.each do |vehicle| %>
-          <%= check_box_tag "vehicle_ids_#{vehicle.id}", vehicle.id,
-          @report.resources.map(&:usable).include?(vehicle), name: 'report[vehicle_ids][]' %><%= vehicle.name %><br>
-        <% end %>
-       </p>
-   <% end %>
-     <%= hidden_field_tag 'report[vehicle_ids][]' %>
-     <% ::Refinery::Reports::Person.grouped.each do |department, persons| %>
+    <% Usable.all['intern'].each do |department, usables| %>
       <p>
         <h3><%= department %></h3>
-        <% persons.each do |person| %>
-          <%= check_box_tag "person_ids_#{person.id}", person.id,
-            @report.resources.map(&:usable).include?(person), name: 'report[person_ids][]' %><%= person.name %><br>
+        <% usables.each do |usable| %>
+          <%= check_box_tag usable.checkbox_title, usable.id,
+          @report.resources.map(&:usable).include?(usable), name: usable.checkbox_name %><%= usable %><br>
         <% end %>
       </p>
     <% end %>
-    <%= hidden_field_tag 'report[person_ids][]' %>
+  </div>
+
+  <div class='field'>
+    <% Usable.all['extern'].each do |department, usables| %>
+      <p>
+        <h3><%= department %></h3>
+        <% usables.each do |usable| %>
+          <%= check_box_tag usable.checkbox_title, usable.id,
+          @report.resources.map(&:usable).include?(usable), name: usable.checkbox_name %><%= usable %><br>
+        <% end %>
+      </p>
+    <% end %>
   </div>
 
   <div class='field'>

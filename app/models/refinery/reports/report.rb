@@ -1,4 +1,5 @@
 require_relative '../../../../lib/models/type.rb'
+require_relative '../../../../lib/models/usable.rb'
 
 module Refinery
   module Reports
@@ -60,6 +61,16 @@ module Refinery
 
       def person_ids
         resources.select{|r| r.usable.is_a?(Person)}.map(&:id)
+      end
+
+      def intern_resources
+        intern_ids = Department.intern.map(&:id)
+        resources.select{|r| intern_ids.include?(r.usable.department_id)}.group_by{|r| r.usable.department.name}
+      end
+
+      def extern_resources
+        extern_ids = Department.extern.map(&:id)
+        resources.select{|r| extern_ids.include?(r.usable.department_id)}.group_by{|r| r.usable.department.name}
       end
     end
   end

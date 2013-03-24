@@ -15,6 +15,18 @@ module Refinery
       def self.grouped
         all.group_by{|x| x.department.name}
       end
+
+      def to_s
+        "#{name} #{short_name.present? ? "(#{short_name})" : ""}"
+      end
+
+      def checkbox_title
+        "vehicle_ids_#{id}"
+      end
+
+      def checkbox_name
+        "report[vehicle_ids][]"
+      end
     end
   end
 end

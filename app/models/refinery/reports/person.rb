@@ -15,6 +15,18 @@ module Refinery
       def self.grouped
         all.group_by{|x| x.department.name}
       end
+
+      def to_s
+        "#{position} #{name} #{info.present? ? "(#{info})" : ""}"
+      end
+
+      def checkbox_title
+        "person_ids #{id}"
+      end
+
+      def checkbox_name
+        "report[person_ids][]"
+      end
     end
   end
 end
