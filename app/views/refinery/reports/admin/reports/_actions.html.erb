@@ -12,18 +12,4 @@
     <%= link_to t('refinery.reports.admin.departments.records.title'),
       refinery.reports_admin_departments_path, method: :get %>
   </li>
-<% if !searching? && ::Refinery::Reports::Admin::ReportsController.sortable? && ::Refinery::Reports::Report.any? %>
-  <li>
-    <%= link_to t('.reorder', :what => "Reports"),
-                 refinery.reports_admin_reports_path,
-                 :id => "reorder_action",
-                 :class => "reorder_icon" %>
-
-    <%= link_to t('.reorder_done', :what => "Reports"),
-                 refinery.reports_admin_reports_path,
-                 :id => "reorder_action_done",
-                 :style => "display: none;",
-                 :class => "reorder_icon" %>
-  </li>
-<% end %>
 </ul>
