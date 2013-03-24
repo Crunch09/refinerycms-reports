@@ -14,6 +14,14 @@ module Refinery
       acts_as_indexed :fields => [:name]
 
       validates :name, presence: true, uniqueness: true
+
+      def self.intern
+        where(intern: true)
+      end
+
+      def self.extern
+        where(intern: false)
+      end
     end
   end
 end
