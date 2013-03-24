@@ -1,69 +1,124 @@
+<% content_for :javascripts do %>
+<script src="https://maps.googleapis.com/maps/api/js?keyAIzaSyAn0P5CUJVzdB7fOEYAt6Sz1gEkUtB_leg&sensor=false"
+  type="text/javascript"></script>
+<%= javascript_include_tag 'gmap3.min' %>
+<script type="text/javascript">
+$(function(){
+  function check_coordinates_given(){
+    var hash = {};
+    if($('#report_coordinates').text() != ''){
+      hash = {
+        latLng: $('#report_coordinates').text().replace(/[\(\)]/g, '').split(','),
+        visible: true,
+        id: 'location'
+      };
+    }
+    return hash;
+  }
+
+  $("#map_canvas").gmap3({
+    map:{
+      options:{
+        center:[50.975242, 9.323609],
+        zoom:12,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+        },
+        navigationControl: true
+      }
+    },
+    marker:{
+      values:[
+        check_coordinates_given()
+      ]
+    }
+  });
+});
+
+</script>
+
+<% end %>
+
 <% content_for :body_content_title do %>
   <%= @report.keyword %>
 <% end %>
 
 <% content_for :body do %>
-  <section>
-    <h1>Keyword</h1>
-    <p>
-      <%=raw @report.keyword %>
-    </p>
-  </section>
-  <section>
-    <h1>Location</h1>
-    <p>
-      <%=raw @report.location %>
-    </p>
-  </section>
-  <section>
-    <h1>Started At</h1>
-    <p>
-      <%=raw @report.started_at %>
-    </p>
-  </section>
-  <section>
-    <h1>Ended At</h1>
-    <p>
-      <%=raw @report.ended_at %>
-    </p>
-  </section>
-  <section>
-    <h1>Is Running</h1>
-    <p>
-      <%=raw @report.is_running %>
-    </p>
-  </section>
-  <section>
-    <h1>Chief</h1>
-    <p>
-      <%=raw @report.chief %>
-    </p>
-  </section>
-  <section>
-    <h1>Report</h1>
-    <p>
-      <%=raw @report.report %>
-    </p>
-  </section>
-  <section>
-    <h1>Author</h1>
-    <p>
-      <%=raw @report.author %>
-    </p>
-  </section>
-<% end %>
-
-<% content_for :side_body do %>
-  <aside>
-    <h2><%= t('.other') %></h2>
-    <ul id="reports">
-      <% @reports.each do |report| %>
-        <li>
-          <%= link_to report.keyword, refinery.reports_report_path(report) %>
-        </li>
+  <table>
+    <thead>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b><%= label_tag :keyword, @report.class.human_attribute_name(:keyword) %></b>:</td>
+        <td><b><%= @report.keyword %></b></td>
+      </tr>
+      <tr>
+        <td><b><%= label_tag :typ, @report.class.human_attribute_name(:typ) %>:</b></td>
+        <td><%= @report.typ %></td>
+      </tr>
+      <tr>
+        <td><b><%= label_tag :location, @report.class.human_attribute_name(:location) %>:</b></td>
+        <td><%= @report.location %></td>
+      </tr>
+      <tr>
+        <td><b><%= label_tag :started_at, @report.class.human_attribute_name(:started_at) %></b>:</td>
+        <td><%= @report.started_at.strftime("%d.%m.%Y %H:%M") %></td>
+      </tr>
+      <tr>
+        <td><b><%= label_tag :ended_at, @report.class.human_attribute_name(:ended_at) %></b>:</td>
+        <td><%= @report.is_running? ? @report.class.human_attribute_name(:is_running) : @report.ended_at.strftime("%d.%m.%Y %H:%M") %></td>
+      </tr>
+      <tr>
+        <td><b><%= label_tag :chief, @report.class.human_attribute_name(:chief) %></b>:</td>
+        <td><%= @report.chief %></td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="report_coordinates" style="display: none;"><%= @report.coordinates %></div>
+  <% if @report.coordinates.present? %>
+    <div id="map_canvas"></div>
+  <% end %>
+  <div id="intern_box">
+      <% @report.intern_resources.each do |key, val| %>
+        <b><%= key %></b>
+        <ul>
+          <% val.each do |resource| %>
+            <li><%= resource.usable %></li>
+          <% end %>
+        </ul>
       <% end %>
-    </ul>
-  </aside>
+  </div>
+  <div id="extern_box">
+      <% @report.extern_resources.each do |key, val| %>
+        <b><%= key %></b>
+        <ul>
+          <% val.each do |resource| %>
+            <li><%= resource.usable %></li>
+          <% end %>
+        </ul>
+      <% end %>
+  </div>
+  <% if @report.report.present? %>
+    <div id="report">
+      <h4><%= label_tag :report, @report.class.human_attribute_name(:report) %>:</h4>
+      <%= @report.report %>
+      <% if @report.author.present? %>
+        <p>
+          <b><%= label_tag :author, @report.class.human_attribute_name(:author) %></b>: <%= @report.author %>
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+  <% if @report.links.any? %>
+    <div id="links">
+      <h4><%= label_tag :links, @report.class.human_attribute_name(:links) %>:</h4>
+      <% @report.links.each do |link| %>
+        <%= link_to link.title, link.url %><br>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 
 <%= render '/refinery/content_page' %>

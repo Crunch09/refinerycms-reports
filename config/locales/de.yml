@@ -66,7 +66,9 @@ de:
         chief: Einsatzleiter
         report: Einsatzbericht
         author: Verfasser
-      refinery/reports/department:
+        links: Weitere Berichte und Bilder
+        typ: Einsatzart
+      refinery/reports/vehicle:
         short_name: Kurzbezeichnung
   time:
     formats:
