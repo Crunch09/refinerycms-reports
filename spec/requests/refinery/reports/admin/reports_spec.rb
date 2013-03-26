@@ -30,9 +30,11 @@ describe Refinery do
           context "valid data" do
             it "should succeed" do
               fill_in "Keyword", :with => "This is a test of the first string field"
+              fill_in "Location", :with => "Boston"
+              fill_in "Chief", :with => "Peter Parker"
               click_button "Save"
 
-              page.should have_content("'This is a test of the first string field' was successfully added.")
+              page.should have_content("Report was created")
               Refinery::Reports::Report.count.should == 1
             end
           end
@@ -77,7 +79,7 @@ describe Refinery do
             fill_in "Keyword", :with => "A different keyword"
             click_button "Save"
 
-            page.should have_content("'A different keyword' was successfully updated.")
+            page.should have_content("Report was updated")
             page.should have_no_content("A keyword")
           end
         end
