@@ -255,6 +255,7 @@ DEPENDENCIES
   guard-spork (~> 0.5.2)
   jquery-rails (~> 2.0.0)
   nested_form
+  rake
   refinerycms (~> 2.0.3)
   refinerycms-reports!
   refinerycms-testing (~> 2.0.3)

@@ -16,6 +16,7 @@ group :development, :test do
 
   gem 'spork', '~> 0.9.0'
   gem 'guard-spork', '~> 0.5.2'
+  gem 'rake'
 end
 
 # Gems used only for assets and not required
