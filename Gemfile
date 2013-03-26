@@ -7,6 +7,7 @@ gem 'refinerycms', '~> 2.0.3'
 gem 'sqlite3'
 
 gem 'nested_form'
+gem 'rmagick'
 
 group :development, :test do
   gem 'refinerycms-testing', '~> 2.0.3'
