@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116044009) do
+ActiveRecord::Schema.define(:version => 20130326032859) do
 
   create_table "refinery_images", :force => true do |t|
     t.string   "image_mime_type"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130116044009) do
   end
 
   add_index "refinery_page_part_translations", ["locale"], :name => "index_refinery_page_part_translations_on_locale"
-  add_index "refinery_page_part_translations", ["refinery_page_part_id"], :name => "index_f9716c4215584edbca2557e32706a5ae084a15ef"
+  add_index "refinery_page_part_translations", ["refinery_page_part_id"], :name => "index_refinery_page_part_translations_on_refinery_page_part_id"
 
   create_table "refinery_page_parts", :force => true do |t|
     t.integer  "refinery_page_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20130116044009) do
   end
 
   add_index "refinery_page_translations", ["locale"], :name => "index_refinery_page_translations_on_locale"
-  add_index "refinery_page_translations", ["refinery_page_id"], :name => "index_d079468f88bff1c6ea81573a0d019ba8bf5c2902"
+  add_index "refinery_page_translations", ["refinery_page_id"], :name => "index_refinery_page_translations_on_refinery_page_id"
 
   create_table "refinery_pages", :force => true do |t|
     t.integer  "parent_id"
@@ -100,13 +100,55 @@ ActiveRecord::Schema.define(:version => 20130116044009) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "coordinates"
+    t.string   "typ"
   end
 
   create_table "refinery_reports_departments", :force => true do |t|
     t.string   "name"
     t.integer  "position"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "intern",     :default => true
+  end
+
+  create_table "refinery_reports_images", :force => true do |t|
+    t.string   "photo"
+    t.integer  "report_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "refinery_reports_links", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.integer  "report_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "refinery_reports_people", :force => true do |t|
+    t.string   "name"
+    t.string   "position"
+    t.string   "info"
+    t.integer  "department_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "refinery_reports_resources", :force => true do |t|
+    t.integer  "report_id"
+    t.integer  "usable_id"
+    t.string   "usable_type"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "refinery_reports_vehicles", :force => true do |t|
+    t.string   "name"
+    t.string   "short_name"
+    t.integer  "department_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "refinery_resources", :force => true do |t|
