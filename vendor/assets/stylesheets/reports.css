@@ -9,3 +9,32 @@ div#map_canvas{
 select[disabled]{
   background-color: #B8B8B8;
 }
+
+div.gallery{
+  width: 100%;
+  position: relative;
+  float: left;
+}
+
+div.gallery_image{
+  width: 200px;
+  height: 220px;
+  position: relative;
+  float: left;
+  margin: 10px;
+}
+
+div.gallery_image:hover{
+  opacity: .5
+}
+
+a.remove_image{
+  display: none;
+  position: relative;
+  margin-top: -100px;
+  float: left;
+  margin-left: 80px;
+  background-color: #22a7f2;
+  border: 1px solid #22a7f2;
+  border-radius: 5px;
+}

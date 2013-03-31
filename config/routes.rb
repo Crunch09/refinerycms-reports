@@ -13,6 +13,7 @@ Refinery::Core::Engine.routes.append do
         collection do
           post :update_positions
         end
+        resources :images, except: [:show, :edit, :update]
       end
       resources :departments, except: [:show]
     end

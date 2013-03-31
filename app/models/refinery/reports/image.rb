@@ -1,5 +1,3 @@
-require_relative '../../../uploaders/PhotoUploader'
-
 module Refinery
   module Reports
     class Image < Refinery::Core::BaseModel

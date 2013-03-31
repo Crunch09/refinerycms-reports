@@ -1,0 +1,5 @@
+<div class="gallery_image">
+  <%= image_tag(image.photo_url(:thumb)) %>
+  <%= link_to 'Delete',
+              refinery.reports_admin_report_image_path(report_id: image.report_id, id: image.id), method: :delete, remote: true, class: 'remove_image' %>
+</div>

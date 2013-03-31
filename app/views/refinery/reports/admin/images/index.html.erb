@@ -1,0 +1,13 @@
+<h2><%= t('.images') %></h2>
+<div class="gallery">
+  <% @images.each do |image| %>
+    <%= render partial: 'image', locals: { image: image } %>
+  <% end %>
+</div>
+<%= form_for [refinery, :reports_admin, :report, @image] do |f| %>
+  <div>
+    <%= f.label :photo %>
+    <%= f.file_field :photo, multiple: true, name: 'image[photo]' %>
+  </div>
+<% end %>
+

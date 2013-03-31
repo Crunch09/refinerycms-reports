@@ -1,0 +1,5 @@
+<% if @image.new_record? %>
+  alert("Failed to upload image: <%= j @image.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+  $("div.gallery").append("<%= j render partial: 'image', locals: {image: @image} %>");
+<% end %>

@@ -36,6 +36,10 @@ de:
             view_live_html: Sehen Sie sich diesen Einsatzbericht live an <br/><em>(öffnet sich in einem neuen Fenster)</em>
             edit: Diesen Einsatz bearbeiten
             delete: Diesen Einsatz löschen
+            images: Bilder verwalten
+        images:
+          index:
+            images: Bilder
       departments:
         admin:
           departments:

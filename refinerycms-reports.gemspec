@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency             'refinerycms-core',    '~> 2.0.8'
   s.add_dependency             'nested_form'
   s.add_dependency             'carrierwave'
+  s.add_dependency             'jquery-fileupload-rails'
 
   # Development dependencies (usually used for testing)
   s.add_development_dependency 'refinerycms-testing', '~> 2.0.8'

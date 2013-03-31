@@ -7,6 +7,9 @@
 
     <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_reports_admin_report_path(report),
          :title => t('.edit') %>
+    <%= link_to refinery_icon_tag("image_add.png"),
+        refinery.reports_admin_report_images_path(report_id: report.id),
+        title: t('.images') %>
     <%= link_to refinery_icon_tag("delete.png"), refinery.reports_admin_report_path(report),
         :class => "cancel confirm-delete",
         :title => t('.delete'),

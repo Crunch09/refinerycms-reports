@@ -25,6 +25,7 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
+  gem 'jquery-fileupload-rails'
 end
 
 gem 'jquery-rails', '~> 2.0.0'
