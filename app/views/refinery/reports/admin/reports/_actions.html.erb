@@ -6,10 +6,10 @@
   <% end %>
   <li>
     <%= link_to t('.create_new'), refinery.new_reports_admin_report_path,
-                 :class => "add_icon" %>
+                 class: "add_icon" %>
   </li>
   <li>
     <%= link_to t('refinery.reports.admin.departments.records.title'),
-      refinery.reports_admin_departments_path, method: :get %>
+      refinery.reports_admin_departments_path, method: :get, class: 'edit_icon' %>
   </li>
 </ul>
